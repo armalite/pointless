@@ -17,11 +17,9 @@ Status: Work in progress. This repo currently contains the project scaffold (CLI
 
 ## What Pointless will do
 
-🤖 LLM plan → size: The model drafts a concrete change plan, then sizes it into days/points with confidence, assumptions, and questions.
-
-🔎 Progressive retrieval: Pull just-enough context from Jira (issue text/AC) and GitHub (relevant files/snippets, history). Expand only if confidence is low.
-
-🧾 Grounded output (JSON):
+ - 🤖 LLM plan → size: The model drafts a concrete change plan, then sizes it into days/points with confidence, assumptions, and questions.
+ - 🔎 Progressive retrieval: Pull just-enough context from Jira (issue text/AC) and GitHub (relevant files/snippets, history). Expand only if confidence is low.
+ - 🧾 Grounded output (JSON):
 ```json
 {
   "points": 5,
