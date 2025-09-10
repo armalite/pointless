@@ -54,7 +54,73 @@ EEAI_MAX_FILES=20
 You can store these in a local .env (gitignored).
 
 
-Roadmap (near-term)
+## Quick Start
+
+### CLI
+Basic estimate:
+```bash
+poetry run pointless estimate \
+  "Add client method to get all domain monitors" \
+  -d "Expose GET /domains/{id}/monitors via sdk/client.py"
+```
+
+With tags (repeatable) and optional local repo path:
+```bash
+poetry run pointless estimate \
+  "Add client method to get all domain monitors" \
+  -d "Expose GET /domains/{id}/monitors via sdk/client.py" \
+  -t urgent -t backend \
+  -r ~/src/your-repo
+```
+
+Show help / version: 
+```bash
+poetry run pointless --help
+poetry run pointless version
+```
+
+Example output:
+```bash
+{
+  "estimated_hours": 3.4,
+  "complexity": "moderate",
+  "confidence": 0.7,
+  "reasoning": "Heuristic baseline only; final implementation will use progressive retrieval over Jira/GitHub and an LLM (plan→size) with confidence & assumptions.",
+  "factors": ["Moderate description length", "Urgent tag—risk of optimistic sizing"]
+}
+```
+
+### API
+Run the server locally:
+```bash
+poetry run uvicorn pointless.interfaces.api:app --host 0.0.0.0 --port 8080
+```
+
+Health check:
+```bash
+curl http://localhost:8080/healthz
+```
+
+Estimate (POST JSON):
+```bash
+curl -X POST http://localhost:8080/estimate \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "title": "Add client method to get all domain monitors",
+        "description": "Expose GET /domains/{id}/monitors via sdk/client.py",
+        "tags": ["urgent"]
+      }'
+```
+
+Tip: pretty-print with jq:
+```bash
+curl -s http://localhost:8080/healthz | jq
+
+```
+
+(The current responses come from the deterministic placeholder; the LLM + progressive retrieval flow will replace this output.)
+
+## Roadmap (near-term)
 
  - LLM output schema & prompts (plan → size → confidence/assumptions/questions)
  - Progressive retrieval v1 (rank → fetch snippets → expand)
