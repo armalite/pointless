@@ -1,3 +1,5 @@
+WORK IN PROGRESS
+
 # pointless
 
 Pointless is the AI buddy that reads your Jira tickets and codebase, then pretends it knows how long it'll take - just like your team, but faster. 
@@ -26,28 +28,13 @@ pip install pointless
 ## Quick Start
 
 ### CLI Usage
-
 TODO
 
 ### API Usage
-
 TODO
 
 ### Example Response
-
-```json
-{
-  "estimated_hours": 8.4,
-  "complexity": "complex",
-  "confidence": 0.65,
-  "reasoning": "Based on task analysis, estimated complex complexity. Key factors: Complex keyword detected: critical, Urgent tag - estimate may be optimistic. Applied 1.2x adjustment for estimation uncertainty.",
-  "factors": [
-    "Complex keyword detected: critical",
-    "Urgent tag - estimate may be optimistic",
-    "No description provided - assuming simple task"
-  ]
-}
-```
+TODO
 
 ## Development
 
