@@ -1,8 +1,6 @@
 # pointless
 
-**"Finally, an AI that's as bad at estimating as your team - but way faster!"**
-
-Pointless is the AI buddy that reads your Jira tickets and codebase, then pretends it knows how long it'll take - just like your team, but faster. Perfect for when you need confident-sounding estimates with zero accountability!
+Pointless is the AI buddy that reads your Jira tickets and codebase, then pretends it knows how long it'll take - just like your team, but faster. 
 
 ## Features
 
@@ -29,45 +27,11 @@ pip install pointless
 
 ### CLI Usage
 
-```bash
-# Basic estimation
-pointless estimate "Fix login bug"
-
-# Detailed estimation with context
-pointless estimate "Implement OAuth2 authentication" \
-  --desc "Add OAuth2 with JWT tokens and refresh mechanism" \
-  --jira "AUTH-123" \
-  --context "Express.js API with MongoDB" \
-  --tag "security" --tag "urgent"
-
-# JSON output for scripts
-pointless estimate "Refactor user service" --format json
-```
+TODO
 
 ### API Usage
 
-```bash
-# Start the API server
-uvicorn pointless.interfaces.api:app --reload
-
-# Or use Poetry script
-poetry run uvicorn pointless.interfaces.api:app --reload
-```
-
-```bash
-# Health check
-curl http://localhost:8000/healthz
-
-# Create estimation
-curl -X POST "http://localhost:8000/estimate" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Fix critical payment bug",
-    "description": "Payment processing fails on checkout",
-    "jira_ticket_id": "PAY-456",
-    "tags": ["urgent", "bug", "payment"]
-  }'
-```
+TODO
 
 ### Example Response
 
@@ -126,7 +90,7 @@ Once the server is running, visit:
 
 ## Why "Pointless"?
 
-Because let's be honest - most software estimation is pretty pointless anyway. At least our AI admits it's just making educated guesses based on keyword detection and random adjustments. It's like having a junior developer's estimation confidence with a senior developer's cynicism.
+Guess.
 
 ## Contributing
 
@@ -144,4 +108,4 @@ MIT License - because even our license choices are pointless.
 
 ## Disclaimer
 
-This tool is for entertainment and educational purposes. Please don't actually use it for real project planning. Or do - we're not your manager.
+We take no responsibility for how you use this project for effort estimations.
