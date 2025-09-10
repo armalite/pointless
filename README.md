@@ -41,7 +41,7 @@ poetry install
 
 ### Heuristic
 ```bash
-EEAI_ESTIMATOR=heuristic   # default for now; LLM path coming soon
+POINTLESS_ESTIMATOR=heuristic   # default for now; LLM path coming soon
 ```
 
 ### LLM
