@@ -8,33 +8,22 @@ Status: Work in progress. This repo currently contains the project scaffold (CLI
 
 ## Features
 
-- 🤖 **AI-Powered Estimation**: Uses context-aware LLMs to estimate task effort
-- 📊 **Confidence Metrics**: Provides confidence levels so you know how wrong we might be
-- 🏷️ **Complexity Assessment**: Categorizes tasks from "trivial" to "expert" (mostly expert)
-- 📝 **Detailed Reasoning**: Explains our wild guesses with pseudo-scientific justification
-- 🔄 **Multiple Interfaces**: CLI for developers, REST API for integrations
-- 🎯 **Jira Integration Ready**: Supports Jira ticket IDs (because everything is in Jira)
+- 🤖 **AI-Powered Estimation** — Uses context-aware LLMs to size work (days/points).
+- 🔎 **Progressive Retrieval** — Pulls just-enough context from Jira + GitHub; expands only if confidence is low.
+- 🧭 **Plan-First Output** — Produces a concrete work plan (steps with effort hours) before sizing.
+- 📁 **Impacted Files** — Lists likely files/paths to touch so reviewers can sanity-check fast.
+- 📊 **Confidence Metrics** — Tells you how wrong we might be (with ranges).
+- ❓ **Assumptions & Questions** — Surfaces unknowns that drive estimate variance.
+- 🏷️ **Complexity Assessment** — Tags tasks from “trivial” to “expert” (mostly expert).
+- 📝 **Detailed Reasoning** — Explains our wild guesses with pseudo-scientific justification.
+- 🔄 **Multiple Interfaces** — CLI for developers, REST API for integrations.
+- 🎯 **Jira Integration Ready** — Accepts Jira ticket IDs (because everything is in Jira).
+- 📝 **Write-Back to Jira (optional)** — Posts estimate, confidence, and assumptions to the ticket.
+- 🎯 **Calibration (later)** — Learns from past tickets to tighten ranges per team.
+- 🧩 **Pluggable Models** — Bring your own LLM (OpenAI/Anthropic/Gemini), configurable context limits.
+- 🔐 **Local-First / Private** — Runs locally; easy to containerize for on-prem/VPC.
+- 🧪 **Deterministic Baseline Mode** — Heuristic stub for CI smoke tests while the LLM flow evolves.
 
-## What Pointless will do
-
- - 🤖 LLM plan → size: The model drafts a concrete change plan, then sizes it into days/points with confidence, assumptions, and questions.
- - 🔎 Progressive retrieval: Pull just-enough context from Jira (issue text/AC) and GitHub (relevant files/snippets, history). Expand only if confidence is low.
- - 🧾 Grounded output (JSON):
-```json
-{
-  "points": 5,
-  "days": 2.5,
-  "confidence": 0.78,
-  "rationale": "...",
-  "drivers": ["..."],
-  "impacted_files": ["sdk/client.py", "tests/test_client.py"],
-  "assumptions": ["..."],
-  "questions": ["..."],
-  "plan": [{"description":"...", "effort_hours":4}]
-}
-
-```
-Until the LLM flow lands, the CLI/API returns a temporary heuristic response to keep development unblocked.
 
 ## Install
 ```
