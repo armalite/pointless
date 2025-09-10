@@ -6,7 +6,7 @@ Pointless is the AI buddy that reads your Jira tickets and codebase, then preten
 
 ## Features
 
-- 🤖 **AI-Powered Estimation**: Uses sophisticated algorithms (random numbers) to estimate task effort
+- 🤖 **AI-Powered Estimation**: Uses context-aware LLMs to estimate task effort
 - 📊 **Confidence Metrics**: Provides confidence levels so you know how wrong we might be
 - 🏷️ **Complexity Assessment**: Categorizes tasks from "trivial" to "expert" (mostly expert)
 - 📝 **Detailed Reasoning**: Explains our wild guesses with pseudo-scientific justification
