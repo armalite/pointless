@@ -1,11 +1,13 @@
 # pointless
-
 Pointless is the AI buddy that reads your Jira tickets and codebase, then pretends it knows how long it'll take - just like your team, but faster. 
 
 ## Status
  - WORK IN PROGRESS. 
  - This repo currently contains the project scaffold (CLI + FastAPI) and a deterministic placeholder estimator for smoke tests. 
  - The real product is the LLM-based estimator with progressive retrieval from Jira + GitHub.
+
+## Why (Story) Pointless?
+Estimating every task manually is calorie-counting peanuts. Pointless just does it for you: **plan → effort → confidence**. If someone needs story points, we’ll garnish the plate.
 
 ## Features
 
@@ -20,6 +22,7 @@ Pointless is the AI buddy that reads your Jira tickets and codebase, then preten
 - 🔄 **Multiple Interfaces** — CLI for developers, REST API for integrations.
 - 🎯 **Jira Integration Ready** — Accepts Jira ticket IDs (because everything is in Jira).
 - 📝 **Write-Back to Jira (optional)** — Posts estimate, confidence, and assumptions to the ticket.
+- 🎯 Story Points (optional) — Output points alongside days/hours for teams that still need them.
 - 🎯 **Calibration (later)** — Learns from past tickets to tighten ranges per team.
 - 🧩 **Pluggable Models** — Bring your own LLM (OpenAI/Anthropic/Gemini), configurable context limits.
 - 🔐 **Local-First / Private** — Runs locally; easy to containerize for on-prem/VPC.
