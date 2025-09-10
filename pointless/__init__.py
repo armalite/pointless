@@ -1,3 +1,3 @@
-"""Pointless: AI-powered effort estimation for Jira tickets and codebases."""
-
+"""Pointless — AI effort estimates when story pointing feels... pointless."""
+__all__ = ["__version__"]
 __version__ = "0.1.0"
