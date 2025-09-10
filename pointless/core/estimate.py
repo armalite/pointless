@@ -1,18 +1,11 @@
 from __future__ import annotations
-
-import os
-
 from .estimators import heuristic
 from .models import EstimationRequest, EstimationResponse
-
+from .config import settings
 
 def estimate_effort(req: EstimationRequest) -> EstimationResponse:
-    """
-    Central dispatcher. For now we only support the heuristic baseline.
-    Later we'll add: if EEAI_ESTIMATOR=llm -> call the LLM estimator.
-    """
-    mode = os.getenv("EEAI_ESTIMATOR", "heuristic").lower()
+    mode = settings.ESTIMATOR
     if mode == "heuristic":
         return heuristic.estimate(req)
-    # Fallback until LLM estimator is implemented:
+    # LLM path will plug in here later
     return heuristic.estimate(req)

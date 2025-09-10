@@ -46,13 +46,13 @@ EEAI_ESTIMATOR=heuristic   # default for now; LLM path coming soon
 
 ### LLM
 ```bash
-EEAI_JIRA_BASE_URL=...
-EEAI_JIRA_TOKEN=...          # or OAuth later
-EEAI_GH_TOKEN=...            # or GitHub App later
-EEAI_MODEL_PROVIDER=openai   # provider selection
-EEAI_OPENAI_API_KEY=...
-EEAI_CONFIDENCE_THRESHOLD=0.7
-EEAI_MAX_FILES=20
+POINTLESS_JIRA_BASE_URL=...
+POINTLESS_JIRA_TOKEN=...          # or OAuth later
+POINTLESS_GH_TOKEN=...            # or GitHub App later
+POINTLESS_MODEL_PROVIDER=openai   # provider selection
+POINTLESS_OPENAI_API_KEY=...
+POINTLESS_CONFIDENCE_THRESHOLD=0.7
+POINTLESS_MAX_FILES=20
 ```
 You can store these in a local .env (gitignored).
 
