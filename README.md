@@ -4,7 +4,10 @@ WORK IN PROGRESS
 
 Pointless is the AI buddy that reads your Jira tickets and codebase, then pretends it knows how long it'll take - just like your team, but faster. 
 
-*Status:* WORK IN PROGRESS. This repo currently contains the project scaffold (CLI + FastAPI) and a deterministic placeholder estimator for smoke tests. The real product is the LLM-based estimator with progressive retrieval from Jira + GitHub.
+## Status
+ - WORK IN PROGRESS. 
+ - This repo currently contains the project scaffold (CLI + FastAPI) and a deterministic placeholder estimator for smoke tests. 
+ - The real product is the LLM-based estimator with progressive retrieval from Jira + GitHub.
 
 ## Features
 
