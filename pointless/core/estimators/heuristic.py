@@ -84,6 +84,52 @@ def estimate(req: EstimationRequest) -> EstimationResponse:
         if "high" in req.mcp_enhanced_context.lower() or "critical" in req.mcp_enhanced_context.lower():
             base *= 1.1
             factors.append("High/Critical priority from Jira ticket")
+        
+        # Check for GitHub complexity indicators
+        if "large codebase" in req.mcp_enhanced_context.lower():
+            base += 1.0
+            complexity = TaskComplexity.COMPLEX
+            factors.append("Large codebase detected via GitHub analysis")
+        
+        if "typescript" in req.mcp_enhanced_context.lower():
+            base += 0.5
+            factors.append("TypeScript complexity detected")
+        
+        if "react" in req.mcp_enhanced_context.lower() or "component" in req.mcp_enhanced_context.lower():
+            base += 0.3
+            factors.append("Frontend framework complexity")
+        
+        # Architecture pattern complexity
+        if "architecture patterns:" in req.mcp_enhanced_context.lower():
+            pattern_count = len([p for p in req.mcp_enhanced_context.split("Architecture Patterns:")[1].split("\\n")[0].split(",") if p.strip()])
+            if pattern_count > 2:
+                base += 0.5
+                factors.append(f"Multiple architecture patterns detected ({pattern_count})")
+        
+        # Multiple programming languages increase complexity
+        if "languages:" in req.mcp_enhanced_context.lower():
+            languages_line = req.mcp_enhanced_context.split("Languages:")[1].split("\\n")[0]
+            language_count = len([l for l in languages_line.split(",") if l.strip()])
+            if language_count > 2:
+                base += 0.4
+                complexity = max(complexity, TaskComplexity.MODERATE)
+                factors.append(f"Multi-language codebase ({language_count} languages)")
+        
+        # High number of relevant files indicates complexity
+        if "relevant files:" in req.mcp_enhanced_context.lower():
+            try:
+                files_text = req.mcp_enhanced_context.split("Relevant Files:")[1].split("files found")[0].strip()
+                file_count = int(files_text)
+                if file_count > 10:
+                    base += 0.8
+                    complexity = TaskComplexity.COMPLEX
+                    factors.append(f"Many relevant files found ({file_count})")
+                elif file_count > 5:
+                    base += 0.4
+                    complexity = max(complexity, TaskComplexity.MODERATE)
+                    factors.append(f"Several relevant files found ({file_count})")
+            except (ValueError, IndexError):
+                pass  # Ignore parsing errors
 
     # Optional: look at local repo path if provided.
     if req.codebase_context:

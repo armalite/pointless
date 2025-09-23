@@ -30,5 +30,11 @@ class Settings:
     MCP_ATLASSIAN_API_TOKEN: str | None = _getenv("MCP_ATLASSIAN_API_TOKEN")
     MCP_ATLASSIAN_EMAIL: str | None = _getenv("MCP_ATLASSIAN_EMAIL")
     MCP_TIMEOUT: int = int(_getenv("MCP_TIMEOUT", "30"))
+    
+    # MCP GitHub integration settings
+    MCP_GITHUB_ENABLED: bool = _getenv("MCP_GITHUB_ENABLED", "false").lower() == "true"
+    MCP_GITHUB_SERVER_URL: str | None = _getenv("MCP_GITHUB_SERVER_URL")
+    MCP_GITHUB_TOKEN: str | None = _getenv("MCP_GITHUB_TOKEN")
+    MCP_GITHUB_TIMEOUT: int = int(_getenv("MCP_GITHUB_TIMEOUT", "30"))
 
 settings = Settings()

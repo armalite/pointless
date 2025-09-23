@@ -20,6 +20,9 @@ def estimate_cmd(
     tags: List[str] = typer.Option(None, "--tag", "-t", help="Repeatable tag, e.g. -t urgent"),
     repo: str = typer.Option("", "--repo", "-r", help="Local repo path to scan (optional)"),
     use_mcp: bool = typer.Option(False, "--mcp", help="Use MCP to retrieve Jira ticket data"),
+    github_owner: str = typer.Option("", "--github-owner", help="GitHub repository owner"),
+    github_repo: str = typer.Option("", "--github-repo", help="GitHub repository name"),
+    use_github_mcp: bool = typer.Option(False, "--github-mcp", help="Use GitHub MCP for codebase analysis"),
 ) -> None:
     """Estimate from CLI; prints JSON to stdout."""
     req = EstimationRequest(
@@ -29,6 +32,9 @@ def estimate_cmd(
         tags=tags or [],
         codebase_context=repo or None,
         use_mcp=use_mcp,
+        github_owner=github_owner or None,
+        github_repo=github_repo or None,
+        use_github_mcp=use_github_mcp,
     )
     res = estimate_effort(req)
     typer.echo(json.dumps(res.model_dump(), indent=2))
