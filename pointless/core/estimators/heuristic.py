@@ -49,6 +49,10 @@ def estimate(req: EstimationRequest) -> EstimationResponse:
     """
     rnd = _rng_from_title(req.title)
     text = f"{req.title} {req.description or ''}".lower()
+    
+    # Include MCP enhanced context in analysis
+    if hasattr(req, 'mcp_enhanced_context') and req.mcp_enhanced_context:
+        text += f" {req.mcp_enhanced_context}".lower()
 
     base = 1.0
     factors: List[str] = []
@@ -74,6 +78,12 @@ def estimate(req: EstimationRequest) -> EstimationResponse:
     if req.tags and any(t.lower() == "urgent" for t in req.tags):
         base *= 0.9
         factors.append("Urgent tag—risk of optimistic sizing")
+    
+    # Check for priority indicators from MCP data
+    if hasattr(req, 'mcp_enhanced_context') and req.mcp_enhanced_context:
+        if "high" in req.mcp_enhanced_context.lower() or "critical" in req.mcp_enhanced_context.lower():
+            base *= 1.1
+            factors.append("High/Critical priority from Jira ticket")
 
     # Optional: look at local repo path if provided.
     if req.codebase_context:

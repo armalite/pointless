@@ -24,4 +24,11 @@ class Settings:
     CONFIDENCE_THRESHOLD: float = float(_getenv("CONFIDENCE_THRESHOLD", "0.7"))
     MAX_FILES: int = int(_getenv("MAX_FILES", "20"))
 
+    # MCP (Model Context Protocol) settings for Atlassian integration
+    MCP_ENABLED: bool = _getenv("MCP_ENABLED", "false").lower() == "true"
+    MCP_ATLASSIAN_SERVER_URL: str | None = _getenv("MCP_ATLASSIAN_SERVER_URL")
+    MCP_ATLASSIAN_API_TOKEN: str | None = _getenv("MCP_ATLASSIAN_API_TOKEN")
+    MCP_ATLASSIAN_EMAIL: str | None = _getenv("MCP_ATLASSIAN_EMAIL")
+    MCP_TIMEOUT: int = int(_getenv("MCP_TIMEOUT", "30"))
+
 settings = Settings()

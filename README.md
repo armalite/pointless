@@ -54,6 +54,16 @@ POINTLESS_OPENAI_API_KEY=...
 POINTLESS_CONFIDENCE_THRESHOLD=0.7
 POINTLESS_MAX_FILES=20
 ```
+
+### MCP (Model Context Protocol) Integration
+```bash
+POINTLESS_MCP_ENABLED=true                    # Enable MCP integration
+POINTLESS_MCP_ATLASSIAN_SERVER_URL=...        # Atlassian MCP server URL
+POINTLESS_MCP_ATLASSIAN_API_TOKEN=...         # Atlassian API token
+POINTLESS_MCP_ATLASSIAN_EMAIL=...             # Atlassian account email
+POINTLESS_MCP_TIMEOUT=30                      # MCP request timeout in seconds
+```
+
 You can store these in a local .env (gitignored).
 
 
@@ -74,6 +84,14 @@ poetry run pointless estimate \
   -d "Expose GET /domains/{id}/monitors via sdk/client.py" \
   -t urgent -t backend \
   -r ~/src/your-repo
+```
+
+With MCP integration for Jira ticket data:
+```bash
+poetry run pointless estimate \
+  "Add client method to get all domain monitors" \
+  -j PROJ-123 \
+  --mcp
 ```
 
 Show help / version: 
@@ -111,6 +129,19 @@ curl -X POST http://localhost:8080/estimate \
   -d '{
         "title": "Add client method to get all domain monitors",
         "description": "Expose GET /domains/{id}/monitors via sdk/client.py",
+        "tags": ["urgent"]
+      }'
+```
+
+With MCP integration:
+```bash
+curl -X POST http://localhost:8080/estimate \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "title": "Add client method to get all domain monitors",
+        "description": "Expose GET /domains/{id}/monitors via sdk/client.py",
+        "jira_ticket_id": "PROJ-123",
+        "use_mcp": true,
         "tags": ["urgent"]
       }'
 ```

@@ -169,3 +169,6 @@ Thumbs.db
 *.tmp
 *.temp
 /tmp/
+
+# Demo and example files (optional)
+demo_*.py
