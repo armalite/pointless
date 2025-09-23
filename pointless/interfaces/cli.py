@@ -19,6 +19,7 @@ def estimate_cmd(
     jira: str = typer.Option("", "--jira", "-j", help="Jira ticket ID (optional)"),
     tags: List[str] = typer.Option(None, "--tag", "-t", help="Repeatable tag, e.g. -t urgent"),
     repo: str = typer.Option("", "--repo", "-r", help="Local repo path to scan (optional)"),
+    use_mcp: bool = typer.Option(False, "--mcp", help="Use MCP to retrieve Jira ticket data"),
 ) -> None:
     """Estimate from CLI; prints JSON to stdout."""
     req = EstimationRequest(
@@ -27,6 +28,7 @@ def estimate_cmd(
         jira_ticket_id=jira or None,
         tags=tags or [],
         codebase_context=repo or None,
+        use_mcp=use_mcp,
     )
     res = estimate_effort(req)
     typer.echo(json.dumps(res.model_dump(), indent=2))

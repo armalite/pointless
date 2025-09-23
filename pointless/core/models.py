@@ -22,6 +22,10 @@ class EstimationRequest(BaseModel):
     jira_ticket_id: Optional[str] = None
     codebase_context: Optional[str] = None  # placeholder until retrieval is wired
     tags: List[str] = Field(default_factory=list)
+    
+    # MCP integration fields
+    use_mcp: bool = Field(default=False, description="Whether to use MCP for data retrieval")
+    mcp_enhanced_context: Optional[str] = Field(default=None, description="Additional context from MCP sources")
 
 
 class EstimationResponse(BaseModel):
@@ -31,6 +35,10 @@ class EstimationResponse(BaseModel):
     confidence: float = Field(..., ge=0, le=1)
     reasoning: str
     factors: List[str] = Field(default_factory=list)
+    
+    # MCP integration fields
+    mcp_data_used: bool = Field(default=False, description="Whether MCP data was used in estimation")
+    jira_ticket_summary: Optional[str] = Field(default=None, description="Summary of Jira ticket if retrieved via MCP")
 
 
 class HealthResponse(BaseModel):
