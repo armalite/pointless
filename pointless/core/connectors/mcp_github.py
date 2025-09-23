@@ -1,4 +1,15 @@
-"""MCP connector for GitHub integration."""
+"""MCP connector for GitHub integration.
+
+This module provides GitHub integration via the Model Context Protocol (MCP).
+It enables the pointless estimator to analyze GitHub repositories to better
+understand codebase complexity and provide more accurate time estimates.
+
+Key features:
+- Repository information retrieval
+- Codebase analysis for task-specific complexity assessment
+- Programming language and architecture pattern detection
+- Relevant file identification based on task descriptions
+"""
 
 from __future__ import annotations
 
