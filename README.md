@@ -64,6 +64,14 @@ POINTLESS_MCP_ATLASSIAN_EMAIL=...             # Atlassian account email
 POINTLESS_MCP_TIMEOUT=30                      # MCP request timeout in seconds
 ```
 
+### GitHub MCP Integration
+```bash
+POINTLESS_MCP_GITHUB_ENABLED=true             # Enable GitHub MCP integration
+POINTLESS_MCP_GITHUB_SERVER_URL=...           # GitHub MCP server URL
+POINTLESS_MCP_GITHUB_TOKEN=...                # GitHub access token
+POINTLESS_MCP_GITHUB_TIMEOUT=30               # GitHub MCP request timeout in seconds
+```
+
 You can store these in a local .env (gitignored).
 
 
@@ -94,6 +102,27 @@ poetry run pointless estimate \
   --mcp
 ```
 
+With GitHub MCP integration for codebase analysis:
+```bash
+poetry run pointless estimate \
+  "Add API endpoint for user management" \
+  --description "Create REST endpoints for CRUD operations" \
+  --github-owner octocat \
+  --github-repo Hello-World \
+  --github-mcp
+```
+
+Combined MCP integration (Jira + GitHub):
+```bash
+poetry run pointless estimate \
+  "Implement user authentication" \
+  -j AUTH-456 \
+  --mcp \
+  --github-owner myorg \
+  --github-repo myapp \
+  --github-mcp
+```
+
 Show help / version: 
 ```bash
 poetry run pointless --help
@@ -107,7 +136,18 @@ Example output:
   "complexity": "moderate",
   "confidence": 0.7,
   "reasoning": "Heuristic baseline only; final implementation will use progressive retrieval over Jira/GitHub and an LLM (plan→size) with confidence & assumptions.",
-  "factors": ["Moderate description length", "Urgent tag—risk of optimistic sizing"]
+  "factors": [
+    "Moderate description length",
+    "Enhanced with Jira ticket data via MCP",
+    "Enhanced with GitHub codebase analysis via MCP",
+    "TypeScript complexity detected",
+    "Multiple architecture patterns detected (3)"
+  ],
+  "mcp_data_used": true,
+  "jira_ticket_summary": "Implement user authentication system",
+  "github_data_used": true,
+  "github_repository": "myorg/myapp",
+  "github_analysis_summary": "Analyzed 5 relevant files, detected 3 complexity indicators"
 }
 ```
 
@@ -146,6 +186,20 @@ curl -X POST http://localhost:8080/estimate \
       }'
 ```
 
+With GitHub MCP integration:
+```bash
+curl -X POST http://localhost:8080/estimate \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "title": "Add API endpoint for user management",
+        "description": "Create REST endpoints for CRUD operations",
+        "github_owner": "octocat",
+        "github_repo": "Hello-World",
+        "use_github_mcp": true,
+        "tags": ["backend"]
+      }'
+```
+
 Tip: pretty-print with jq:
 ```bash
 curl -s http://localhost:8080/healthz | jq
@@ -158,7 +212,8 @@ curl -s http://localhost:8080/healthz | jq
 
  - LLM output schema & prompts (plan → size → confidence/assumptions/questions)
  - Progressive retrieval v1 (rank → fetch snippets → expand)
- - Jira & GitHub connectors (MCP or direct APIs)
+ - ✅ GitHub connectors (MCP integration for codebase analysis)
+ - Jira & GitHub connectors (MCP or direct APIs) - Jira partially complete
  - Write-back to Jira (comment/fields)
  - Optional Docker/Compose; Helm later if useful
 

@@ -26,6 +26,11 @@ class EstimationRequest(BaseModel):
     # MCP integration fields
     use_mcp: bool = Field(default=False, description="Whether to use MCP for data retrieval")
     mcp_enhanced_context: Optional[str] = Field(default=None, description="Additional context from MCP sources")
+    
+    # GitHub integration fields
+    github_owner: Optional[str] = Field(default=None, description="GitHub repository owner")
+    github_repo: Optional[str] = Field(default=None, description="GitHub repository name")
+    use_github_mcp: bool = Field(default=False, description="Whether to use GitHub MCP for codebase analysis")
 
 
 class EstimationResponse(BaseModel):
@@ -39,6 +44,11 @@ class EstimationResponse(BaseModel):
     # MCP integration fields
     mcp_data_used: bool = Field(default=False, description="Whether MCP data was used in estimation")
     jira_ticket_summary: Optional[str] = Field(default=None, description="Summary of Jira ticket if retrieved via MCP")
+    
+    # GitHub integration fields
+    github_data_used: bool = Field(default=False, description="Whether GitHub MCP data was used in estimation")
+    github_repository: Optional[str] = Field(default=None, description="GitHub repository analyzed if GitHub MCP was used")
+    github_analysis_summary: Optional[str] = Field(default=None, description="Summary of GitHub codebase analysis")
 
 
 class HealthResponse(BaseModel):

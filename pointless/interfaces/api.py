@@ -23,6 +23,7 @@ def root():
         "docs": "/docs",
         "health": "/healthz",
         "mcp_enabled": settings.MCP_ENABLED,
+        "github_mcp_enabled": settings.MCP_GITHUB_ENABLED,
     }
 
 
